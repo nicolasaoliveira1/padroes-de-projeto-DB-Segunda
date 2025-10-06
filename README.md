@@ -65,3 +65,10 @@ Este repositório está preparado para o trabalho em grupo. A base é uma API mi
 
 
 Boa implementação! Lembrem-se de justificar escolhas, não só “fazer”.
+
+---
+### Documentação da Estrutura do Projeto
+Para uma explicação detalhada das camadas, responsabilidades e decisões didáticas, consulte o documento:
+`docs/EstruturaProjeto.md`
+
+Esse material ajuda a entender onde cada novo arquivo deve ser colocado conforme o projeto evoluir.
