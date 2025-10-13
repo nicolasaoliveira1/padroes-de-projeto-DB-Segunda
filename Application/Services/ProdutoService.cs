@@ -14,7 +14,7 @@ public class ProdutoService : IProdutoService
     public ProdutoService(IProdutoRepository repo)
     {
         _repo = repo;
-        _factory = _factory;
+        _factory = factory;
     }
 
     public async Task<IEnumerable<Produto>> ListarAsync(CancellationToken ct = default)
