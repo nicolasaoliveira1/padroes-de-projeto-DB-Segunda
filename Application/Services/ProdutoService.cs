@@ -9,16 +9,17 @@ namespace Application.Services;
 public class ProdutoService : IProdutoService
 {
     private readonly IProdutoRepository _repo;
+    private readonly ProdutoFactory _factory;
 
     public ProdutoService(IProdutoRepository repo)
     {
         _repo = repo;
+        _factory = _factory;
     }
 
-    public Task<IEnumerable<Produto>> ListarAsync(CancellationToken ct = default)
+    public async Task<IEnumerable<Produto>> ListarAsync(CancellationToken ct = default)
     {
-        // TODO: Adicionar possibilidade de filtros futuros (Specification Pattern em fases posteriores)
-        throw new NotImplementedException();
+        return await _repo.GetAllAsync(ct);
     }
 
     public Task<Produto?> ObterAsync(int id, CancellationToken ct = default)
