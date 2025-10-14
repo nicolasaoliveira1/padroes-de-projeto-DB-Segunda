@@ -24,8 +24,10 @@ public class ProdutoService : IProdutoService
 
     public Task<Produto?> ObterAsync(int id, CancellationToken ct = default)
     {
-        // TODO: Validar id > 0 e talvez normalizar algum aspecto.
-        throw new NotImplementedException();
+        if (id <= 0)
+            throw new ArgumentException("ID inválido");
+
+        return await _repo.GetByIdAsync(id, ct);
     }
 
     public Task<Produto> CriarAsync(string nome, string descricao, decimal preco, int estoque, CancellationToken ct = default)
