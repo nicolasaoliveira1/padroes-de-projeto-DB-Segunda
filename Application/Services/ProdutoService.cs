@@ -32,14 +32,18 @@ public class ProdutoService : IProdutoService
 
     public Task<Produto> CriarAsync(string nome, string descricao, decimal preco, int estoque, CancellationToken ct = default)
     {
-        // TODO: Integrar com ProdutoFactory.Criar e depois persistir via repository.
-        // TODO: Tratar regras: nome não vazio, preço > 0, estoque >= 0, trimming.
-        throw new NotImplementedException();
+        var produto = ProdutoFactory.Criar(nome, descricao, preco, estoque);
+        await _repo.AddAsync(produto, ct);
+        await _repo.SaveChangesAsync(ct);
+        return produto;
     }
 
     public Task<bool> RemoverAsync(int id, CancellationToken ct = default)
     {
-        // TODO: Buscar, validar existência e remover.
-        throw new NotImplementedException();
+        var produto = await _repo.GetByIdAsync(id, ct);
+        if(produto == null) return false;
+        repo.Delete(produto);
+        await _repo.SaveChangesAsync(ct);
+        return true;
     }
 }
