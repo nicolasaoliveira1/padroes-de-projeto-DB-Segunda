@@ -32,9 +32,21 @@ public class ProdutoService : IProdutoService
 
     public Task<Produto> CriarAsync(string nome, string descricao, decimal preco, int estoque, CancellationToken ct = default)
     {
-        var produto = ProdutoFactory.Criar(nome, descricao, preco, estoque);
+        if (string.IsNullOrWhiteSpace(nome))
+            throw new ArgumentException("Nome é obrigatório");
+
+        if (preco <= 0)
+            throw new ArgumentException("Preço deve ser maior que zero");
+
+        if (estoque < 0)
+            throw new ArgumentException("Estoque não pode ser negativo");
+
+        // Criação do produto via Factory
+        var produto = _factory.Criar(nome.Trim(), descricao?.Trim() ?? "", preco, estoque);
+
         await _repo.AddAsync(produto, ct);
         await _repo.SaveChangesAsync(ct);
+
         return produto;
     }
 
